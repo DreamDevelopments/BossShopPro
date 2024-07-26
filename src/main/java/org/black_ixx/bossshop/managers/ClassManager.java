@@ -113,9 +113,9 @@ public class ClassManager {
             }
         }
 
-        if (Bukkit.getPluginManager().isPluginEnabled("EpicSpawners")) {
+        /*if (Bukkit.getPluginManager().isPluginEnabled("EpicSpawners")) {
             spawnerHandler = new SpawnersHandlerEpicSpawners();
-        }
+        }*/
 
     }
 

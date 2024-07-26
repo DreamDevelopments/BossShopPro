@@ -11,6 +11,7 @@ public class PointsManager {
 
     private BSPointsPlugin pa;
 
+
     public PointsManager() {
         this(ClassManager.manager.getSettings().getPointsPlugin());
     }
@@ -122,6 +123,11 @@ public class PointsManager {
     public boolean usesDoubleValues() {
         return pa.usesDoubleValues();
     }
+
+    public BSPointsPlugin getPointsPlugin() {
+        return this.pa;
+    }
+
 
     public enum PointsPlugin {
         NONE(new String[]{"none", "nothing"}),

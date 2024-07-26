@@ -20,6 +20,8 @@ import java.util.List;
 
 public class BuyItemHandler {
 
+    public static String HANDLER = "%%__LICENSE__%%";
+
 
     /**
      * Load an item from a config into a shop

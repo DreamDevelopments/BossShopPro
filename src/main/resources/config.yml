@@ -55,6 +55,11 @@ SearchSubfoldersForShops: false
 AllowUnsafeEnchantments: false
 #
 #
+# InvisibleInventoryTag:
+# If an open inventory contains this tag in their title it will hide the contents of the players inventory
+InvisibleInventoryTag: "DD_INVISIBLE_TAG"
+#
+#
 # AllowSellingDamagedItems:
 # If enabled the damage weapons, armor or tools have taken is ignored when players sell them.
 AllowSellingDamagedItems: false

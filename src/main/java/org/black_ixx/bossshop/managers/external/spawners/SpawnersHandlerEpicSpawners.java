@@ -1,7 +1,7 @@
 package org.black_ixx.bossshop.managers.external.spawners;
 
 
-import com.songoda.epicspawners.API.EpicSpawners;
+import com.craftaro.epicspawners.API.EpicSpawners;
 import org.bukkit.inventory.ItemStack;
 
 

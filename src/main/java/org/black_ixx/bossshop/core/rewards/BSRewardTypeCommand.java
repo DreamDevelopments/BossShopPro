@@ -40,7 +40,7 @@ public class BSRewardTypeCommand extends BSRewardType {
         List<String> commands = (List<String>) reward;
 
         for (String s : commands) {
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ClassManager.manager.getStringManager().transform(s, buy, null, null, p));
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ClassManager.manager.getStringManager().transform(s, buy, null, null, p, false));
         }
         if (p.getOpenInventory() != null & !ClassManager.manager.getPlugin().getAPI().isValidShop(p.getOpenInventory())) {
             p.updateInventory();

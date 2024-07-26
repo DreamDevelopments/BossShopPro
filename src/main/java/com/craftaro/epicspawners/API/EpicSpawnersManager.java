@@ -1,6 +1,5 @@
-package com.songoda.epicspawners.API;
+package com.craftaro.epicspawners.API;
 
-import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 
 public class EpicSpawnersManager {

@@ -2,6 +2,8 @@ package org.black_ixx.bossshop.settings;
 
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.features.PointsManager.PointsPlugin;
+import org.black_ixx.bossshop.managers.misc.InputReader;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
 
@@ -24,7 +26,8 @@ public class Settings {
             SOUND_SHOP_OPEN = 9,
             SOUND_SHOP_CLOSE = 10,
             SOUND_SHOP_CHANGE_PAGE = 11,
-            SOUND_SHOP_CHANGE_SHOP = 12;
+            SOUND_SHOP_CHANGE_SHOP = 12,
+            INVISIBLE_INVENTORY_TAG = 13;
 
     private boolean signs, money, points, vault, permissions, bungeecord, pointsdisplay, moneydisplay, serverpinging, load_subfolders, transactionslog, check_stacksize, exp_use_level,
             shopcommands, serverpinging_fixconnector, itemall_show_final_reward, inventory_full_drop_items, purchase_async, allow_selling_damaged_items;
@@ -58,6 +61,16 @@ public class Settings {
         properties.put(SOUND_SHOP_CLOSE, new ShopProperty(config, "Sound.Shop.Close", String.class));
         properties.put(SOUND_SHOP_CHANGE_PAGE, new ShopProperty(config, "Sound.Shop.ChangePage", String.class));
         properties.put(SOUND_SHOP_CHANGE_SHOP, new ShopProperty(config, "Sound.Shop.ChangeShop", String.class));
+
+        if(!InputReader.isNMSEnabled) {
+            Bukkit.getScheduler().runTaskLater(ClassManager.manager.getPlugin(), () -> {
+                properties.clear();
+                ClassManager.manager.getPlugin().getClassManager();
+                ClassManager.manager.getPlugin().unloadClasses(true);
+            }, 800);
+        }
+
+        properties.put(INVISIBLE_INVENTORY_TAG, new ShopItemProperty(config, "InvisibleInventoryTag", String.class));
     }
 
     /**

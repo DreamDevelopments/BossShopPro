@@ -25,20 +25,32 @@ public class StringManager {
 
     private static final Pattern hexPattern = Pattern.compile("(#[a-fA-F0-9]{6})");
 
+
     /**
      * Transform specific strings from one thing to another
      * @param s input string
      * @return transformed string
      */
     public String transform(String s) {
+        return transform(s, true);
+    }
+
+    public String transform(String s, boolean replaceColors) {
         if (s == null) {
             return null;
         }
+        if(!replaceColors)
+            return s;
+
+        //s = s.replaceAll("\\\\#", "DZ|ZD");
+
         Matcher matcher = hexPattern.matcher(s);
         while (matcher.find()) {
             String color = s.substring(matcher.start(), matcher.end());
             s = s.replace(color, "" + net.md_5.bungee.api.ChatColor.of(color));
         }
+
+        //s = s.replaceAll("DZ\\|ZD", "#");
 
         s = s.replace("[<3]", "❤");
         s = s.replace("[*]", "★");
@@ -65,7 +77,10 @@ public class StringManager {
         s = s.replace("[up]", "↑");
         s = s.replace("[down]", "↓");
 
+
+        //s = s.replaceAll("\\\\&", "DZ|ZD");
         s = ChatColor.translateAlternateColorCodes('&', s);
+        //s = s.replaceAll("DZ\\|ZD", "&");
 
         if (ClassManager.manager.getSettings().getServerPingingEnabled(true)) {
             s = ClassManager.manager.getServerPingingManager().transform(s);
@@ -79,8 +94,11 @@ public class StringManager {
         return s;
     }
 
-
     public String transform(String s, BSBuy item, BSShop shop, BSShopHolder holder, Player target) {
+        return transform(s, item, shop, holder, target, true);
+    }
+
+    public String transform(String s, BSBuy item, BSShop shop, BSShopHolder holder, Player target, boolean replaceColors) {
         if (s == null) {
             return null;
         }
@@ -106,11 +124,34 @@ public class StringManager {
             Bukkit.getPluginManager().callEvent(event);
             s = event.getText();
         }
+        else if(s.startsWith("##")) {
 
-        return transform(s, target);
+            if( shop != null) {
+                if (shop.getShopName() != null) {
+                    s = s.replace("%shop%", shop.getShopName());
+                }
+                if (shop.getDisplayName() != null) {
+                    s = s.replace("%shopdisplayname%", shop.getDisplayName());
+                }
+            }
+
+            if (holder != null) {
+                s = s.replace("%page%", String.valueOf(holder.getDisplayPage()));
+                s = s.replace("%maxpage%", String.valueOf(holder.getDisplayHighestPage()));
+            }
+
+            return s;
+
+        }
+
+        return transform(s, target, replaceColors);
     }
 
     public String transform(String s, Player target) {
+        return transform(s, target, true);
+    }
+
+    public String transform(String s, Player target, boolean replaceColors) {
         if (s == null) {
             return null;
         }
@@ -148,7 +189,39 @@ public class StringManager {
             }
         }
 
-        return transform(s);
+        return transform(s, replaceColors);
+    }
+
+    public String removeEmojis(String s) {
+        s = s.replace("❤", "[<3]");
+        s = s.replace("★", "[*]");
+        s = s.replace("✹", "[**]");
+        s = s.replace("●", "[o]");
+        s = s.replace("✔", "[v]");
+        s = s.replace("♦", "[+]");
+        s = s.replace("✦", "[x]");
+        s = s.replace("♠", "[%]");
+        s = s.replace("♣", "[%%]");
+        s = s.replace("☢", "[radioactive]");
+        s = s.replace("☮", "[peace]");
+        s = s.replace("☾", "[moon]");
+        s = s.replace("♔", "[crown]");
+        s = s.replace("☃", "[snowman]");
+        s = s.replace("⚒", "[tools]");
+        s = s.replace("⚔", "[swords]");
+        s = s.replace("♩ ", "[note]");
+        s = s.replace("#", "[hashtag]");
+        s = s.replace("&", "[and]");
+        s = s.replace("://", "[esc]");
+        s = s.replace("█", "[block]");
+        s = s.replace("▲", "[triangle]");
+        s = s.replace("⚠", "[warn]");
+        s = s.replace("←", "[left]");
+        s = s.replace("→", "[right]");
+        s = s.replace("↑", "[up]");
+        s = s.replace("↓", "[down]");
+        return s;
+
     }
 
 

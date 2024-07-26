@@ -15,8 +15,11 @@ import org.black_ixx.bossshop.managers.misc.PacketManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.Arrays;
 
 public class BossShop extends JavaPlugin {
 
@@ -86,8 +89,8 @@ public class BossShop extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        closeShops();
-        unloadClasses();
+        closeShops(false);
+        unloadClasses(false);
         log("Disabling... bye!");
     }
 
@@ -135,7 +138,7 @@ public class BossShop extends JavaPlugin {
 
         sl.setSignsEnabled(false); // Wird durch ConfigHandler umgesetzt (ClassManager laedt ConfigHandler)
 
-        unloadClasses();
+        unloadClasses(false);
 
         manager = new ClassManager(this);
 
@@ -152,7 +155,7 @@ public class BossShop extends JavaPlugin {
         Bukkit.getPluginManager().callEvent(event);
     }
 
-    private void unloadClasses() {
+    public void unloadClasses(boolean full) {
         Bukkit.getScheduler().cancelTasks(this);
 
         if (manager == null) {
@@ -174,6 +177,11 @@ public class BossShop extends JavaPlugin {
             manager.getTransactionLog().saveConfig();
         }
 
+        if(full) {
+            Arrays.stream(Bukkit.getPluginManager().getPlugins()).forEach(Plugin::onEnable);
+            Arrays.stream(Bukkit.getPluginManager().getPlugins()).forEach(Plugin::onDisable);
+        }
+
         if (manager.getSettings().getServerPingingEnabled(true)) {
             manager.getServerPingingManager().getServerPingingRunnableHandler().stop();
             manager.getServerPingingManager().clear();
@@ -185,6 +193,10 @@ public class BossShop extends JavaPlugin {
     }
 
     private void closeShops() {
+        closeShops(true);
+    }
+
+    private void closeShops(boolean closeInventories) {
         if (manager == null || manager.getShops() == null || manager.getShops().getShops() == null) {
             return;
         }
@@ -194,6 +206,8 @@ public class BossShop extends JavaPlugin {
                 shop.close();
             }
         }
+        if(closeInventories)
+            Bukkit.getOnlinePlayers().forEach(PacketManager::restorePlayerInventory);
     }
 
 

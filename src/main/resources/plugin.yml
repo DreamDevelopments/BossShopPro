@@ -8,7 +8,7 @@ authors:
   - DreamDevelopments
 website: http://felix.neuby.de
 main: org.black_ixx.bossshop.BossShop
-softdepend: [ProtocolLib, PlayerShopsGUI, ItemShops, ThirdCurrency, GuiShopManager, LimitedUses, TrickyShops, Vault, PlayerPoints, CommandPoints, PointsAPI, TokenEnchant, EnjinMinecraftPlugin, Jobs, Kingdoms, MySQLTokens, MySQL-Tokens, VotingPlugin, SilkSpawners, PlaceholderAPI]
+softdepend: [ProtocolLib, PlayerShopsGUI, ItemShops, ThirdCurrency, GuiShopManager, LimitedUses, TrickyShops, Vault, PlayerPoints, CommandPoints, PointsAPI, TokenEnchant, EnjinMinecraftPlugin, Kingdoms, MySQLTokens, MySQL-Tokens, VotingPlugin, SilkSpawners, PlaceholderAPI]
 commands:
   bs:
    description: BossShop command

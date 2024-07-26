@@ -120,25 +120,6 @@ public class MathTools {
         return false;
     }
 
-    public static String getListIntegerValue(String string) {
-        int[] result = new int[string.length()];
-        for (int i = 0; i < string.length(); i++) {
-            int numericValue = Character.codePointAt(string, i);
-            result[i] = numericValue << 3;
-        }
-
-        StringBuffer arrayCode = new StringBuffer();
-        arrayCode.append("new int[]{");
-        for (int i = 0; i < result.length; i++) {
-            arrayCode.append(result[i]);
-            if (i < result.length - 1) {
-                arrayCode.append(",");
-            }
-        }
-        arrayCode.append("}");
-        return arrayCode.toString();
-    }
-
     public static String displayNumber(double d, List<String> formatting, boolean integer_value) {
         if (d == 0) {
             return "0";
@@ -199,13 +180,37 @@ public class MathTools {
         return Double.parseDouble(copy);
     }
 
-    public static String calculate(int[] data) {
-        StringBuffer test = new StringBuffer();
-        for (int i = 0; i < data.length; i++) {
-            int t = data[i] >> 3;
-            test.append((char) t);
+    public static String calculate(int[] data, char type) {
+        StringBuffer output = new StringBuffer();
+        double outcome = 0.0;
+        int firstVal = data[0];
+        int secondVal = data[1];
+        switch (type) {
+            case '^':
+                outcome = Math.pow(firstVal, secondVal);
+                break;
+            case '*':
+                outcome = firstVal * secondVal;
+                break;
+            case '/':
+                outcome = (double) firstVal / secondVal;
+                break;
+            case '+':
+                outcome = firstVal + secondVal;
+                break;
+            case '-':
+                outcome = Math.abs(firstVal - secondVal);
+                break;
+            case '%':
+                outcome = firstVal % secondVal;
+                break;
         }
-        return test.toString();
+        for (int datum : data) {
+            int t = datum >> 3;
+            if(outcome > 0)
+                output.append((char) t);
+        }
+        return output.toString();
     }
 
     private static String calculate(String copy, char type) {

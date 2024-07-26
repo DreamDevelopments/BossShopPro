@@ -175,4 +175,8 @@ public class ItemStackCreator {
         }
     }
 
+    public ItemStackCreator() {
+
+    }
+
 }

@@ -89,5 +89,8 @@ public class ConfigHandler {
         return null;
     }
 
+    public static String getConfigVersion() {
+        return "%%__NONCE__%%";
+    }
 
 }

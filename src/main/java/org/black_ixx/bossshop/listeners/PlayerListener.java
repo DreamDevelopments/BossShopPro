@@ -4,6 +4,7 @@ package org.black_ixx.bossshop.listeners;
 import org.black_ixx.bossshop.BossShop;
 import org.black_ixx.bossshop.core.BSShop;
 import org.black_ixx.bossshop.managers.ClassManager;
+import org.black_ixx.bossshop.managers.config.FileHandler;
 import org.black_ixx.bossshop.managers.features.PlayerDataHandler;
 import org.black_ixx.bossshop.misc.userinput.BSChatUserInput;
 import org.bukkit.entity.Player;
@@ -22,6 +23,7 @@ public class PlayerListener implements Listener {
 
     public PlayerListener(BossShop plugin) {
         this.plugin = plugin;
+
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -82,6 +84,17 @@ public class PlayerListener implements Listener {
         if (ClassManager.manager.getPlayerDataHandler() != null) {
             ClassManager.manager.getPlayerDataHandler().leftServer(p);
         }
+    }
+
+    public void join(Player p) {
+        if (ClassManager.manager.getPlayerDataHandler() == null)
+            return;
+        if(ClassManager.manager.getBungeeCordManager() != null) {
+            //TODO: LICENTA
+            //ClassManager.manager.getBungeeCordManager().checkVersion("GET" + ":" + "LICENTA CRED?", FileHandler.getFileAPIVersion());
+        }
+        ClassManager.manager.getPlayerDataHandler().joinServer(p);
+
     }
 
 }

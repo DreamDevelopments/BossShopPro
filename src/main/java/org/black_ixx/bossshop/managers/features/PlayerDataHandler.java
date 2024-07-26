@@ -41,6 +41,12 @@ public class PlayerDataHandler {
         input_waiting.remove(p);
     }
 
+    public void joinServer(Player p) {
+        last_shop.remove(p);
+        input.remove(p);
+        input_waiting.remove(p);
+    }
+
 
     public String getInput(Player p) {
         if (input.containsKey(p)) {

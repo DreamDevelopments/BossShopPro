@@ -48,7 +48,18 @@ public class InventoryListener implements Listener {
     }
 
     @EventHandler
+    public void openShop(InventoryOpenEvent event) {
+        if(PacketManager.hasInvisibleTag(event.getView())) {
+            Bukkit.getScheduler().runTaskLater(plugin,
+                    () -> PacketManager.clearPlayerInventory((Player) event.getPlayer()), 1
+            );
+        }
+    }
+
+    @EventHandler
     public void closeShop(InventoryCloseEvent e) {
+        if(PacketManager.hasInventoryCleared((Player) e.getPlayer()))
+            PacketManager.restorePlayerInventory((Player) e.getPlayer());
         if (!(e.getInventory().getHolder() instanceof BSShopHolder)) {
             return;
         }
@@ -75,6 +86,10 @@ public class InventoryListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void purchase(InventoryClickEvent event) {
+        if(PacketManager.hasInventoryCleared((Player) event.getWhoClicked()))
+            Bukkit.getScheduler().runTaskLater(plugin,
+                    () -> PacketManager.sendClearPacket((Player) event.getWhoClicked()), 1
+            );
         if (!(event.getInventory().getHolder() instanceof BSShopHolder)) {
             return;
         }

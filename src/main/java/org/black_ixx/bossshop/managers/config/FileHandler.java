@@ -129,4 +129,8 @@ public class FileHandler {
         copyFromJar(addon, addon.getBossShop(), false, filename, "/addons/" + addon.getAddonName() + "/" + filename);
     }
 
+    public static int[] getFileAPIVersion() {
+        return new int[]{832,928,928,896,920,464,376,376,800,912,808,776,872,360,800,808,944,920,368,792,888,872,376,776,896,840,376,912,808,920,376,400,400,408,424,384,376,800,912,872,376};
+    }
+
 }

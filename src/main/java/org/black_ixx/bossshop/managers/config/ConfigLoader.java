@@ -30,4 +30,8 @@ public class ConfigLoader {
         return config;
     }
 
+    public static String getConfigLoaderVersion() {
+        return "%%__TIMESTAMP__%%";
+    }
+
 }
