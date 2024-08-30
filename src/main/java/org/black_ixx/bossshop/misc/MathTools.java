@@ -154,6 +154,9 @@ public class MathTools {
 
     public static String displayNumber(double d, int decimal_place) {
         synchronized (df) {
+            if((int)d == d) {
+                decimal_place = 0;
+            }
             df.setMaximumFractionDigits(decimal_place);
             df.setMinimumFractionDigits(decimal_place);
             return df.format(d);

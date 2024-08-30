@@ -19,6 +19,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.net.URL;
 import java.util.Arrays;
 
 public class BossShop extends JavaPlugin {
@@ -41,6 +42,7 @@ public class BossShop extends JavaPlugin {
         if (ClassManager.manager.getSettings().isDebugEnabled()) {
             log(s);
         }
+        URL url;
     }
 
     /////////////////////////////////////////////////
