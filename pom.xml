@@ -34,31 +34,6 @@
 
 	<repositories>
 		<repository>
-			<id>repo</id>
-			<url>https://repo.glaremasters.me/repository/public/</url>
-		</repository>
-		<repository>
-			<id>BenCodez Repo</id>
-			<url>https://nexus.bencodez.com/repository/maven-public/</url>
-		</repository>
-		<!-- Bundabrg's Repo -->
-		<repository>
-			<id>bundabrg-repo</id>
-			<url>https://repo.worldguard.com.au/repository/maven-public</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-		<!-- Jitpack -->
-		<repository>
-			<id>jitpack.io</id>
-			<url>https://jitpack.io</url>
-		</repository>
-
-		<repository>
 			<id>spigot-repo</id>
 			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
 		</repository>
@@ -74,207 +49,45 @@
 			<url>https://repo.dmulloy2.net/repository/public/</url>
 		</repository>
 
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+
+		<repository>
+			<id>placeholderapi</id>
+			<url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
+		</repository>
+
+		<repository>
+			<id>lang-utils-repo</id>
+			<url>https://raw.github.com/MascusJeoraly/LanguageUtils/mvn-repo/</url>
+		</repository>
+
+		<repository>
+			<id>BenCodez Repo</id>
+			<url>https://nexus.bencodez.com/repository/maven-public/</url>
+		</repository>
+
+		<repository>
+			<id>bungeecord-repo</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</repository>
+
+		<repository>
+			<id>rosewood-repo</id>
+			<url>https://repo.rosewooddev.io/repository/public/</url>
+		</repository>
 	</repositories>
 
 	<dependencies>
-		<!-- Platform -->
-        <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot</artifactId>
-            <version>1.20.2-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.18.28</version>
+			<groupId>org.spigotmc</groupId>
+			<artifactId>spigot-api</artifactId>
+			<version>1.21.1-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Used for data handling -->
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.1</version>
-            <scope>provided</scope>
-        </dependency>
-
-		<!-- Used for bungee cord -->
-		<dependency>
-			<groupId>net.md-5</groupId>
-			<artifactId>bungeecord-api</artifactId>
-			<version>LATEST</version>
-		</dependency>
-
-		<!-- Used for economy -->
-		<dependency>
-			<groupId>net.milkbowl</groupId>
-			<artifactId>vault</artifactId>
-			<version>1.7</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<!-- Used for placeholders -->
-		<dependency>
-			<groupId>me.clip</groupId>
-			<artifactId>placeholderapi</artifactId>
-			<version>2.10.3</version>
-			<scope>provided</scope>
-		</dependency>
-
-<!--		&lt;!&ndash; Used for lilypay &ndash;&gt;
-		<dependency>
-			<groupId>lilypad.client.connect</groupId>
-			<artifactId>lib</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>-->
-
-
-		<!-- Adds player points support -->
-		<dependency>
-			<groupId>org.black_ixx</groupId>
-			<artifactId>PlayerPoints</artifactId>
-			<version>2.1.4</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<!-- Adds jobs support -->
-<!--		<dependency>
-			<groupId>com.gamingmesh.jobs</groupId>
-			<artifactId>Jobs</artifactId>
-			<version>LATEST</version>
-			<scope>provided</scope>
-		</dependency>-->
-		<dependency>
-			<artifactId>Jobs</artifactId>
-			<groupId>com.gamingmesh.jobs</groupId>
-			<version>5.2.0.0</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/lib/Jobs5.2.0.0.jar</systemPath>
-		</dependency>
-
-
-		<!-- Adds voting plugin support -->
-		<dependency>
-			<groupId>com.bencodez</groupId>
-			<artifactId>votingplugin</artifactId>
-			<version>6.14.2</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<!-- Adds command points support -->
-		<dependency>
-			<groupId>pgDev.bukkit</groupId>
-			<artifactId>CommandPoints</artifactId>
-			<version>1.0</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<!-- Adds token manager support -->
-		<dependency>
-			<groupId>com.github.Realizedd</groupId>
-			<artifactId>TokenManager</artifactId>
-			<version>3.2.3</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<!-- Adds tokens support -->
-		<dependency>
-			<groupId>com.masterderpydoge.tokens</groupId>
-			<artifactId>TokenCore</artifactId>
-			<version>1.4</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<!-- Adds enjin support -->
-		<dependency>
-			<groupId>com.enjin</groupId>
-			<artifactId>EnjinMinecraftPlugin</artifactId>
-			<version>3.5.7</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<!-- Adds points api support -->
-		<dependency>
-			<groupId>me.BukkitPVP</groupId>
-			<artifactId>PointsAPI</artifactId>
-			<version>1.6.8</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<!-- Adds token enchant support -->
-		<dependency>
-			<groupId>com.vk2gpz.tokenenchant</groupId>
-			<artifactId>TokenEnchantAPI</artifactId>
-			<version>15.3.2</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<!-- Adds coins support -->
-		<dependency>
-			<groupId>me.justeli.coins.main</groupId>
-			<artifactId>Coins</artifactId>
-			<version>1.9.2</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<!-- Adds gadgets menu support -->
-		<dependency>
-			<groupId>com.yapzhenyie.GadgetsMenu</groupId>
-			<artifactId>GadgetsMenu</artifactId>
-			<version>4.3.32</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<!-- Adds kingdoms support -->
-		<!-- Provided stubs
-		<dependency>
-			<groupId>org.kingdoms.main</groupId>
-			<artifactId>Kingdoms</artifactId>
-			<version>8.5.3</version>
-			<systemPath>${basedir}/lib/Kingdoms.jar</systemPath>
-			<scope>system</scope>
-		</dependency>-->
-
-		<!-- Adds mysql tokens support -->
-		<dependency>
-			<groupId>me.bukkit.mTokens.Inkzzz</groupId>
-			<artifactId>Tokens</artifactId>
-			<version>1.2</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<!-- Adds silk spawners support -->
-		<dependency>
-			<groupId>de.dustplanet.silkspawners.SilkSpawners</groupId>
-			<artifactId>SilkSpawners</artifactId>
-			<version>5.0.2</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<!-- Adds epic spawners support -->
-		<!-- Provided stubs
-		<dependency>
-			<groupId>com.songoda.epicspawners</groupId>
-			<artifactId>EpicSpawners</artifactId>
-			<version>6</version>
-			<systemPath>${basedir}/lib/EpicSpawners.jar</systemPath>
-			<scope>system</scope>
-		</dependency>-->
-
-		<!-- Used for language utils -->
-		<dependency>
-			<groupId>com.meowj</groupId>
-			<artifactId>LangUtils</artifactId>
-			<version>1.6.1</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<!-- Used for bedrock support -->
 		<dependency>
 			<groupId>org.geysermc.geyser</groupId>
 			<artifactId>api</artifactId>
@@ -282,13 +95,66 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Used for packets -->
 		<dependency>
-			<groupId>com.comphenix.protocol</groupId>
-			<artifactId>ProtocolLib</artifactId>
-			<version>5.1.0</version>
+			<groupId>com.github.MilkBowl</groupId>
+			<artifactId>VaultAPI</artifactId>
+			<version>1.7</version>
 			<scope>provided</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>me.clip</groupId>
+			<artifactId>placeholderapi</artifactId>
+			<version>2.11.6</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.meowj</groupId>
+			<artifactId>LangUtils</artifactId>
+			<!--Please check the latest version -->
+			<version>1.9</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.bencodez</groupId>
+			<artifactId>votingplugin</artifactId>
+			<version>6.17.1</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.Realizedd</groupId>
+			<artifactId>TokenManager</artifactId>
+			<version>3.2.4</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.Zrips</groupId>
+			<artifactId>Jobs</artifactId>
+			<version>v5.2.2.3</version> <!-- Change the LATEST to the current version of jobs -->
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>net.md-5</groupId>
+			<artifactId>bungeecord-api</artifactId>
+			<version>1.19-R0.1-SNAPSHOT</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.black_ixx</groupId>
+			<artifactId>playerpoints</artifactId>
+			<version>3.2.7</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 </project>
