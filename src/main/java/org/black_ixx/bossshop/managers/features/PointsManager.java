@@ -32,24 +32,9 @@ public class PointsManager {
         }
 
         switch (p) {
-            case COMMANDPOINTS:
-                this.pa = new BSPointsPluginCommandPoints();
-                break;
-
-            case ENJIN_MINECRAFT_PLUGIN:
-                this.pa = new BSPointsPluginEnjin();
-                break;
 
             case PLAYERPOINTS:
                 this.pa = new BSPointsPluginPlayerPoints();
-                break;
-
-            case POINTSAPI:
-                this.pa = new BSPointsPluginPointsAPI();
-                break;
-
-            case TOKENENCHANT:
-                this.pa = new BSPointsPluginTokenEnchant();
                 break;
 
             case TOKENMANAGER:
@@ -60,24 +45,12 @@ public class PointsManager {
                 this.pa = new BSPointsPluginJobs();
                 break;
 
-            case MYSQL_TOKENS:
-                this.pa = new BSPointsPluginMySQL_Tokens();
-                break;
-
-            case MYSQLTOKENS:
-                this.pa = new BSPointsPluginMySQLTokens();
-                break;
-
             case VOTINGPLUGIN:
                 this.pa = new BSPointsPluginVotingPlugin();
                 break;
 
             case KINGDOMS:
                 this.pa = new BSPointsPluginKingdoms();
-                break;
-
-            case GadetsMenu:
-                this.pa = new BSPointsPluginGadgetsMenu();
                 break;
 
             case NONE:
