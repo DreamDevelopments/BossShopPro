@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.black_ixx</groupId>
 	<artifactId>DreamBossShopPro</artifactId>
-	<version>3.0.8</version>
+	<version>3.1.0</version>
 	<name>DreamBossShopPro</name>
 	<description>Create virtual chest shops</description>
 	<build>
