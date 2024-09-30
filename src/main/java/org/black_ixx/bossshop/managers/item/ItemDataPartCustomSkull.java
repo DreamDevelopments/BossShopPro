@@ -1,8 +1,5 @@
 package org.black_ixx.bossshop.managers.item;
 
-import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.properties.Property;
-import org.apache.commons.codec.binary.Base64;
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.bukkit.Bukkit;
@@ -11,13 +8,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.profile.PlayerProfile;
+import org.bukkit.profile.PlayerTextures;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.*;
 
 public class ItemDataPartCustomSkull extends ItemDataPart {
 
@@ -26,68 +24,24 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
             return i;
         }
 
-        ItemMeta skullMeta = i.getItemMeta();
-        GameProfile profile = new GameProfile(UUID.randomUUID(), "customSkull");
-
-        Property property = input.contains("http://textures.minecraft.net/texture") ? getPropertyURL(input) : getProperty(input);
-        profile.getProperties().put("textures", property);
-        Field profileField = null;
+        SkullMeta skullMeta = (SkullMeta) i.getItemMeta();
+        PlayerProfile profile = Bukkit.createPlayerProfile(UUID.randomUUID(), "bsp_customSkull");
         try {
-            profileField = skullMeta.getClass().getDeclaredField("profile");
-        } catch (NoSuchFieldException | SecurityException e) {
-            e.printStackTrace();
-        }
-        profileField.setAccessible(true);
-        try {
-            profileField.set(skullMeta, profile);
-        } catch (IllegalArgumentException | IllegalAccessException e) {
+            profile.getTextures().setSkin(new URL(input));
+        } catch(MalformedURLException e) {
+            Bukkit.getLogger().warning("[BossShopPro] Invalid URL for custom skull texture: " + input);
             e.printStackTrace();
         }
         i.setItemMeta(skullMeta);
         return i;
     }
 
-    private static Property getProperty(String texture) {
-        return new Property("textures", texture);
-    }
-
-    private static Property getPropertyURL(String url) {
-        byte[] encodedData = Base64.encodeBase64(String.format("{textures:{SKIN:{url:\"%s\"}}}", url).getBytes());
-        return new Property("textures", new String(encodedData));
-    }
-
     public static String readSkullTexture(ItemStack i) {
         if (i.getType() == Material.PLAYER_HEAD) {
             SkullMeta meta = (SkullMeta) i.getItemMeta();
-            Field profileField = null;
-            try {
-                profileField = meta.getClass().getDeclaredField("profile");
-                profileField.setAccessible(true);
-
-                GameProfile profile = (GameProfile) profileField.get(meta);
-                if (profile != null) {
-                    if (profile.getProperties() != null) {
-                        Collection<Property> properties = profile.getProperties().get("textures");
-                        if (properties != null) {
-
-                            Iterator<Property> iterator = properties.iterator();
-                            if (iterator.hasNext()) {
-                                Property property = iterator.next();
-                                Method getValue;
-                                try {
-                                    getValue = Property.class.getMethod("value");
-                                } catch (NoSuchMethodException e) {
-                                    getValue = Property.class.getMethod("getValue");
-                                }
-                                return (String)getValue.invoke(property);
-                            }
-                        }
-                    }
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            PlayerProfile playerProfile = meta.getOwnerProfile();
+            assert playerProfile != null;
+            return Objects.requireNonNull(playerProfile.getTextures().getSkin()).toString();
         }
         return null;
     }

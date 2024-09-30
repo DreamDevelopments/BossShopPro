@@ -39,7 +39,7 @@ public class ItemDataPartBanner extends ItemDataPart {
                     } catch (Exception e) {
                     }
                 }
-                meta.setBaseColor(basecolor);
+                item.setType(Material.valueOf(basecolor.name() + "_BANNER"));
                 meta.setPatterns(patterns);
             }
             item.setItemMeta(meta);
