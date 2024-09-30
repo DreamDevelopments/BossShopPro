@@ -4,7 +4,6 @@ import org.black_ixx.bossshop.BossShop;
 import org.black_ixx.bossshop.events.BSChoosePageLayoutEvent;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.features.PageLayoutHandler;
-import org.black_ixx.bossshop.managers.misc.PacketManager;
 import org.black_ixx.bossshop.misc.Misc;
 import org.black_ixx.bossshop.settings.Settings;
 import org.bukkit.Bukkit;
@@ -29,8 +28,6 @@ public abstract class BSShop {
     private String sign_text = "[BossShop]";
 
     private String bedrockMenu;
-
-    private boolean removePlayerInventory;
 
     private String displayname;
     private String[] commands;
@@ -79,16 +76,6 @@ public abstract class BSShop {
     public boolean hasBedrockMenu() {
         return this.bedrockMenu != null;
     }
-
-    public void setRemovePlayerInventory(boolean removePlayerInventory) {
-        this.removePlayerInventory = removePlayerInventory;
-    }
-
-    public boolean removePlayerInventory() {
-        return removePlayerInventory;
-    }
-
-
 
     public String getShopName() {
         return shop_name;
@@ -320,9 +307,6 @@ public abstract class BSShop {
         p.openInventory(createInventory(p, ClassManager.manager, page, highest_page, oldshopholder));
         ClassManager.manager.getPlayerDataHandler().openedShop(p, this);//TODO: only store previous shop, not current shop somehow.
 
-        if(this.removePlayerInventory()) {
-            PacketManager.clearPlayerInventory(p);
-        }
     }
 
     public void close() {
