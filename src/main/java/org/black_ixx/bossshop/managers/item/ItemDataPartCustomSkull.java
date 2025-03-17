@@ -27,8 +27,8 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
         SkullMeta skullMeta = (SkullMeta) i.getItemMeta();
         PlayerProfile profile = Bukkit.createPlayerProfile(UUID.randomUUID(), "bsp_customSkull");
         try {
-            profile.getTextures().setSkin(new URL(input));
-        } catch(MalformedURLException e) {
+            profile.getTextures().setSkin(getURL(input));
+        } catch(Exception e) {
             Bukkit.getLogger().warning("[BossShopPro] Invalid URL for custom skull texture: " + input);
             e.printStackTrace();
         }
@@ -36,12 +36,36 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
         return i;
     }
 
+    private static URL getURL(String url) {
+        try {
+            return new URL(url);
+        } catch (MalformedURLException e) {
+            return getBase64URL(url);
+        }
+    }
+
+    private static URL getBase64URL(String base64) {
+        String decoded = new String(Base64.getDecoder().decode(base64));
+        try {
+            return new URL(decoded.split("\"url\":\"")[1].split("\"")[0]);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public static String readSkullTexture(ItemStack i) {
         if (i.getType() == Material.PLAYER_HEAD) {
             SkullMeta meta = (SkullMeta) i.getItemMeta();
             PlayerProfile playerProfile = meta.getOwnerProfile();
-            assert playerProfile != null;
-            return Objects.requireNonNull(playerProfile.getTextures().getSkin()).toString();
+            if(playerProfile == null) {
+                return null;
+            }
+            try {
+                return Objects.requireNonNull(playerProfile.getTextures().getSkin()).toString();
+            } catch (Exception e) {
+                return null;
+            }
         }
         return null;
     }
