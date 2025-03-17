@@ -33,7 +33,8 @@ public class ItemDataPartMaterial extends ItemDataPart {
         }
 
         item.setType(m);
-        item.setDurability(durability);
+        if(durability != 0)
+            item.setDurability(durability);
         return item;
     }
 
