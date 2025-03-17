@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.black_ixx</groupId>
 	<artifactId>DreamBossShopPro</artifactId>
-	<version>3.1.0</version>
+	<version>3.1.1</version>
 	<name>DreamBossShopPro</name>
 	<description>Create virtual chest shops</description>
 	<build>
@@ -119,7 +119,7 @@
 		<dependency>
 			<groupId>com.bencodez</groupId>
 			<artifactId>votingplugin</artifactId>
-			<version>6.17.1</version>
+			<version>6.18.3</version>
 			<scope>provided</scope>
 		</dependency>
 
